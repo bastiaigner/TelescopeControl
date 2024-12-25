@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+	  <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="S7netplus" Version="0.20.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ENVInterface">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Autoslew\ENVInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="MyInterfaces">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Autoslew\MyInterfaces.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
