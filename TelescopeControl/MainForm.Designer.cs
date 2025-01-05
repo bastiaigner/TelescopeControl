@@ -28,204 +28,243 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox_envtemp = new System.Windows.Forms.TextBox();
-            this.textBox_envhum = new System.Windows.Forms.TextBox();
-            this.textBox_m1celltemp = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox_m1temp = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button_closecovers = new System.Windows.Forms.Button();
-            this.button_opencovers = new System.Windows.Forms.Button();
-            this.textBox_coverstate = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.timer_refresh = new System.Windows.Forms.Timer(this.components);
-            this.groupBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            textBox_envtemp = new System.Windows.Forms.TextBox();
+            textBox_envhum = new System.Windows.Forms.TextBox();
+            textBox_m1celltemp = new System.Windows.Forms.TextBox();
+            label3 = new System.Windows.Forms.Label();
+            textBox_m1temp = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
+            groupBox = new System.Windows.Forms.GroupBox();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            comboBox1 = new System.Windows.Forms.ComboBox();
+            button_closecovers = new System.Windows.Forms.Button();
+            button_opencovers = new System.Windows.Forms.Button();
+            label6 = new System.Windows.Forms.Label();
+            timer_refresh = new System.Windows.Forms.Timer(components);
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            button_primFocus = new System.Windows.Forms.Button();
+            button_cassFocus = new System.Windows.Forms.Button();
+            groupBox.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(260, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Environment Temperature";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(28, 55);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(292, 32);
+            label1.TabIndex = 0;
+            label1.Text = "Environment Temperature";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(221, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Environment Humidity";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(28, 125);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(255, 32);
+            label2.TabIndex = 1;
+            label2.Text = "Environment Humidity";
             // 
             // textBox_envtemp
             // 
-            this.textBox_envtemp.Enabled = false;
-            this.textBox_envtemp.Location = new System.Drawing.Point(321, 40);
-            this.textBox_envtemp.Name = "textBox_envtemp";
-            this.textBox_envtemp.ReadOnly = true;
-            this.textBox_envtemp.Size = new System.Drawing.Size(132, 31);
-            this.textBox_envtemp.TabIndex = 2;
-            this.textBox_envtemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            textBox_envtemp.Enabled = false;
+            textBox_envtemp.Location = new System.Drawing.Point(348, 51);
+            textBox_envtemp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox_envtemp.Name = "textBox_envtemp";
+            textBox_envtemp.ReadOnly = true;
+            textBox_envtemp.Size = new System.Drawing.Size(143, 39);
+            textBox_envtemp.TabIndex = 2;
+            textBox_envtemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_envhum
             // 
-            this.textBox_envhum.Enabled = false;
-            this.textBox_envhum.Location = new System.Drawing.Point(321, 95);
-            this.textBox_envhum.Name = "textBox_envhum";
-            this.textBox_envhum.ReadOnly = true;
-            this.textBox_envhum.Size = new System.Drawing.Size(132, 31);
-            this.textBox_envhum.TabIndex = 3;
-            this.textBox_envhum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            textBox_envhum.Enabled = false;
+            textBox_envhum.Location = new System.Drawing.Point(348, 122);
+            textBox_envhum.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox_envhum.Name = "textBox_envhum";
+            textBox_envhum.ReadOnly = true;
+            textBox_envhum.Size = new System.Drawing.Size(143, 39);
+            textBox_envhum.TabIndex = 3;
+            textBox_envhum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_m1celltemp
             // 
-            this.textBox_m1celltemp.Enabled = false;
-            this.textBox_m1celltemp.Location = new System.Drawing.Point(321, 205);
-            this.textBox_m1celltemp.Name = "textBox_m1celltemp";
-            this.textBox_m1celltemp.ReadOnly = true;
-            this.textBox_m1celltemp.Size = new System.Drawing.Size(132, 31);
-            this.textBox_m1celltemp.TabIndex = 7;
-            this.textBox_m1celltemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            textBox_m1celltemp.Enabled = false;
+            textBox_m1celltemp.Location = new System.Drawing.Point(348, 262);
+            textBox_m1celltemp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox_m1celltemp.Name = "textBox_m1celltemp";
+            textBox_m1celltemp.ReadOnly = true;
+            textBox_m1celltemp.Size = new System.Drawing.Size(143, 39);
+            textBox_m1celltemp.TabIndex = 7;
+            textBox_m1celltemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 153);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(170, 25);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "M1 Temperature";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(28, 196);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(191, 32);
+            label3.TabIndex = 5;
+            label3.Text = "M1 Temperature";
             // 
             // textBox_m1temp
             // 
-            this.textBox_m1temp.Enabled = false;
-            this.textBox_m1temp.Location = new System.Drawing.Point(321, 150);
-            this.textBox_m1temp.Name = "textBox_m1temp";
-            this.textBox_m1temp.ReadOnly = true;
-            this.textBox_m1temp.Size = new System.Drawing.Size(132, 31);
-            this.textBox_m1temp.TabIndex = 6;
-            this.textBox_m1temp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            textBox_m1temp.Enabled = false;
+            textBox_m1temp.Location = new System.Drawing.Point(348, 192);
+            textBox_m1temp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            textBox_m1temp.Name = "textBox_m1temp";
+            textBox_m1temp.ReadOnly = true;
+            textBox_m1temp.Size = new System.Drawing.Size(143, 39);
+            textBox_m1temp.TabIndex = 6;
+            textBox_m1temp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 208);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(213, 25);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "M1 Cell Temperature";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(28, 266);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(238, 32);
+            label4.TabIndex = 4;
+            label4.Text = "M1 Cell Temperature";
             // 
             // groupBox
             // 
-            this.groupBox.Controls.Add(this.label1);
-            this.groupBox.Controls.Add(this.textBox_m1celltemp);
-            this.groupBox.Controls.Add(this.textBox_envtemp);
-            this.groupBox.Controls.Add(this.label3);
-            this.groupBox.Controls.Add(this.label2);
-            this.groupBox.Controls.Add(this.textBox_m1temp);
-            this.groupBox.Controls.Add(this.textBox_envhum);
-            this.groupBox.Controls.Add(this.label4);
-            this.groupBox.Location = new System.Drawing.Point(39, 36);
-            this.groupBox.Name = "groupBox";
-            this.groupBox.Size = new System.Drawing.Size(490, 292);
-            this.groupBox.TabIndex = 8;
-            this.groupBox.TabStop = false;
-            this.groupBox.Text = "Sensors";
+            groupBox.Controls.Add(label1);
+            groupBox.Controls.Add(textBox_m1celltemp);
+            groupBox.Controls.Add(textBox_envtemp);
+            groupBox.Controls.Add(label3);
+            groupBox.Controls.Add(label2);
+            groupBox.Controls.Add(textBox_m1temp);
+            groupBox.Controls.Add(textBox_envhum);
+            groupBox.Controls.Add(label4);
+            groupBox.Location = new System.Drawing.Point(42, 46);
+            groupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox.Name = "groupBox";
+            groupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox.Size = new System.Drawing.Size(531, 374);
+            groupBox.TabIndex = 8;
+            groupBox.TabStop = false;
+            groupBox.Text = "Sensors";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button_closecovers);
-            this.groupBox1.Controls.Add(this.button_opencovers);
-            this.groupBox1.Controls.Add(this.textBox_coverstate);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Location = new System.Drawing.Point(569, 36);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(380, 218);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Covers";
+            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(button_closecovers);
+            groupBox1.Controls.Add(button_opencovers);
+            groupBox1.Location = new System.Drawing.Point(616, 46);
+            groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox1.Size = new System.Drawing.Size(412, 279);
+            groupBox1.TabIndex = 9;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Covers";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new System.Drawing.Point(27, 55);
+            comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(359, 40);
+            comboBox1.TabIndex = 6;
             // 
             // button_closecovers
             // 
-            this.button_closecovers.Location = new System.Drawing.Point(191, 114);
-            this.button_closecovers.Name = "button_closecovers";
-            this.button_closecovers.Size = new System.Drawing.Size(165, 74);
-            this.button_closecovers.TabIndex = 5;
-            this.button_closecovers.Text = "Close Covers";
-            this.button_closecovers.UseVisualStyleBackColor = true;
-            this.button_closecovers.Click += new System.EventHandler(this.button_closecovers_Click);
+            button_closecovers.Location = new System.Drawing.Point(207, 146);
+            button_closecovers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            button_closecovers.Name = "button_closecovers";
+            button_closecovers.Size = new System.Drawing.Size(179, 95);
+            button_closecovers.TabIndex = 5;
+            button_closecovers.Text = "Close Covers";
+            button_closecovers.UseVisualStyleBackColor = true;
+            button_closecovers.Click += button_closecovers_Click;
             // 
             // button_opencovers
             // 
-            this.button_opencovers.Location = new System.Drawing.Point(25, 114);
-            this.button_opencovers.Name = "button_opencovers";
-            this.button_opencovers.Size = new System.Drawing.Size(155, 74);
-            this.button_opencovers.TabIndex = 4;
-            this.button_opencovers.Text = "Open Covers";
-            this.button_opencovers.UseVisualStyleBackColor = true;
-            this.button_opencovers.Click += new System.EventHandler(this.button_opencovers_Click);
-            // 
-            // textBox_coverstate
-            // 
-            this.textBox_coverstate.Enabled = false;
-            this.textBox_coverstate.Location = new System.Drawing.Point(206, 51);
-            this.textBox_coverstate.Name = "textBox_coverstate";
-            this.textBox_coverstate.ReadOnly = true;
-            this.textBox_coverstate.Size = new System.Drawing.Size(150, 31);
-            this.textBox_coverstate.TabIndex = 3;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 54);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(139, 25);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Current State";
+            button_opencovers.Location = new System.Drawing.Point(27, 146);
+            button_opencovers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            button_opencovers.Name = "button_opencovers";
+            button_opencovers.Size = new System.Drawing.Size(168, 95);
+            button_opencovers.TabIndex = 4;
+            button_opencovers.Text = "Open Covers";
+            button_opencovers.UseVisualStyleBackColor = true;
+            button_opencovers.Click += button_opencovers_Click;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(564, 303);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(362, 25);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Telescope PLC: 10.24.4.3 (S7-1200)";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(611, 379);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(378, 32);
+            label6.TabIndex = 8;
+            label6.Text = "Telescope PLC: 10.24.4.3 (S7-1200)";
             // 
             // timer_refresh
             // 
-            this.timer_refresh.Interval = 2500;
-            this.timer_refresh.Tick += new System.EventHandler(this.timer_refresh_Tick);
+            timer_refresh.Interval = 2500;
+            timer_refresh.Tick += timer_refresh_Tick;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(button_primFocus);
+            groupBox2.Controls.Add(button_cassFocus);
+            groupBox2.Location = new System.Drawing.Point(42, 476);
+            groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox2.Size = new System.Drawing.Size(583, 192);
+            groupBox2.TabIndex = 10;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Focusers";
+            // 
+            // button_primFocus
+            // 
+            button_primFocus.Location = new System.Drawing.Point(291, 59);
+            button_primFocus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            button_primFocus.Name = "button_primFocus";
+            button_primFocus.Size = new System.Drawing.Size(239, 93);
+            button_primFocus.TabIndex = 1;
+            button_primFocus.Text = "Primary Focuser";
+            button_primFocus.UseVisualStyleBackColor = true;
+            button_primFocus.Click += button_primFocus_Click;
+            // 
+            // button_cassFocus
+            // 
+            button_cassFocus.Location = new System.Drawing.Point(28, 59);
+            button_cassFocus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            button_cassFocus.Name = "button_cassFocus";
+            button_cassFocus.Size = new System.Drawing.Size(239, 93);
+            button_cassFocus.TabIndex = 0;
+            button_cassFocus.Text = "Cassegrain Focuser";
+            button_cassFocus.UseVisualStyleBackColor = true;
+            button_cassFocus.Click += button_cassFocus_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 372);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "MainForm";
-            this.Text = "Telescope Control Panel";
-            this.Load += new System.EventHandler(this.MainForm_Load);
-            this.groupBox.ResumeLayout(false);
-            this.groupBox.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1092, 732);
+            Controls.Add(groupBox2);
+            Controls.Add(label6);
+            Controls.Add(groupBox1);
+            Controls.Add(groupBox);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Name = "MainForm";
+            Text = "Telescope Control Panel";
+            Load += MainForm_Load;
+            groupBox.ResumeLayout(false);
+            groupBox.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -240,11 +279,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button_opencovers;
-        private System.Windows.Forms.TextBox textBox_coverstate;
         private System.Windows.Forms.Button button_closecovers;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer timer_refresh;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button_cassFocus;
+        private System.Windows.Forms.Button button_primFocus;
     }
 }

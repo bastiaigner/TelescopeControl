@@ -2,12 +2,18 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net80-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="S7netplus" Version="0.20.0" />
+	  <Reference Include="CMO">
+		  <HintPath>CMO.dll</HintPath>
+	  </Reference>
+	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+
 
 </Project>

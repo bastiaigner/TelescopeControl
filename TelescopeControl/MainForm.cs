@@ -13,7 +13,7 @@ namespace TelescopeControl
     public partial class MainForm : Form
     {
 
-        private TelescopePLC plc = new TelescopePLC("10.24.4.3");
+        private TelescopePLC plc = TelescopePLC.Instance;
 
         public MainForm()
         {
@@ -51,6 +51,18 @@ namespace TelescopeControl
         private void timer_refresh_Tick(object sender, EventArgs e)
         {
             refreshUI();
+        }
+
+        private void button_cassFocus_Click(object sender, EventArgs e)
+        {
+            FocuserForm focuserForm = new FocuserForm(TelescopeFocusers.cassegrainFocuser);
+            focuserForm.Show();
+        }
+
+        private void button_primFocus_Click(object sender, EventArgs e)
+        {
+            FocuserForm focuserForm = new FocuserForm(TelescopeFocusers.primaryFocuser);
+            focuserForm.Show();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TelescopeControlAutoslew
 
         private const double MinimumWaitTime = 2.0;
 
-        private TelescopePLC plc = new TelescopePLC("10.24.4.3");
+        private TelescopePLC plc = TelescopePLC.Instance;
 
         public bool CanMeasureTemperature
         {

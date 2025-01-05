@@ -10,6 +10,9 @@ namespace TelescopeControl
 
     public class TelescopePLC
     {
+
+        public static TelescopePLC Instance { get; } = new TelescopePLC("10.24.4.3");
+
         private string hostname;
         private bool connected;
 
@@ -54,6 +57,39 @@ namespace TelescopeControl
             return readRealValue(0);
         }
 
+        public FlapState ReadFlapState()
+        {
+            var result = plc.Read(DataType.DataBlock, 2, 0, VarType.Int, 1);
+            if (result == null)
+            {
+                throw new Exception("Failed to read value from PLC");
+            }
+
+            return (FlapState)((short)result);
+        }
+
+        public void SetFlapState(FlapState state)
+        {
+            plc.Write(DataType.DataBlock, 2, 0, (short)state);
+        }
+
+
+        public bool GetFlapIsAutomaticMode()
+        {
+            var result = plc.Read(DataType.DataBlock, 2, 2, VarType.Bit, 1);
+            if (result == null)
+            {
+                throw new Exception("Failed to read value from PLC");
+            }
+            return (bool)result;
+        }
+
+        public void SetFlapIsAutomaticMode(bool value)
+        {
+            plc.Write(DataType.DataBlock, 2, 2, value);
+        }
+
+
 
         private double readRealValue(int offset)
         {
@@ -75,5 +111,14 @@ namespace TelescopeControl
                 Disconnect();
             }
         }
+    }
+
+    public enum FlapState
+    {
+        FullyClosed = 0,
+        LeftMirrorDoorOpen = 1,
+        MirrorDoorsOpen = 2,
+        MirrorDoorsAndFlapM1Open = 3,
+        MirrorDoorsAndFlapsOpen = 4,
     }
 }
