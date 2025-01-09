@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 
@@ -16,10 +18,16 @@ namespace TelescopeControl
         {
             _focuser = focuser;
         }
-        
+
         public override void RegisterRoutes(WebApplication app)
         {
             RegisterCommonRoutes(app);
+
+
+            RegisterRoute(app, "GET", "driverversion", (request) =>
+            {
+                return "1.0";
+            });
 
             RegisterRoute(app, "GET", "connected", (request) =>
             {
@@ -32,6 +40,24 @@ namespace TelescopeControl
                 return null;
             });
 
+            RegisterRoute<object>(app, "PUT", "connect", (request) =>
+            {
+                _focuser.Enabled = true;
+                return null;
+            });
+
+            RegisterRoute<object>(app, "PUT", "disconnect", (request) =>
+            {
+                _focuser.Enabled = false;
+                return null;
+            });
+
+            RegisterRoute(app, "GET", "connecting", (request) =>
+            {
+                // In our case, connecting is a synchronous operation...
+                return false;
+            });
+
             RegisterRoute(app, "GET", "description", (request) =>
             {
                 return _focuser.name;
@@ -42,6 +68,11 @@ namespace TelescopeControl
                 return _focuser.name;
             });
 
+            RegisterRoute<string[]>(app, "GET", "supportedactions", (request) =>
+            {
+                return [];
+            });
+
             RegisterRoute(app, "GET", "driverinfo", (request) =>
             {
                 return _focuser.servo.GetType().Name;
@@ -49,7 +80,16 @@ namespace TelescopeControl
 
             RegisterRoute(app, "GET", "interfaceversion", (request) =>
             {
-                return "4";
+                return 4;
+            });
+
+            RegisterRoute<StateValue[]>(app, "GET", "devicestate", (request) =>
+            {
+                return [
+                        new StateValue("IsMoving",  _focuser.isMoving),
+                        new StateValue("Position", focuserToAscomValue(_focuser.currentPosition)),
+                        new StateValue("Temperature", _focuser.currentTemperature)
+                    ];
             });
 
             RegisterRoute(app, "GET", "absolute", (request) =>
@@ -64,17 +104,17 @@ namespace TelescopeControl
 
             RegisterRoute(app, "GET", "maxincrement", (request) =>
             {
-                return (int)(_focuser.maxPosition * 100);
+                return focuserToAscomValue(_focuser.maxPosition);
             });
 
             RegisterRoute(app, "GET", "maxstep", (request) =>
             {
-                return (int)(_focuser.maxPosition * 100);
+                return focuserToAscomValue(_focuser.maxPosition);
             });
 
             RegisterRoute(app, "GET", "position", (request) =>
             {
-                return (int)(_focuser.currentPosition * 100);
+                return focuserToAscomValue(_focuser.currentPosition);
             });
 
             RegisterRoute(app, "GET", "stepsize", (request) =>
@@ -112,12 +152,40 @@ namespace TelescopeControl
             RegisterRoute<object>(app, "PUT", "move", (request) =>
             {
                 int stepPosition = int.Parse(request.Form["Position"]);
-                double position = stepPosition / 100.0;
-                _ =_focuser.MoveTo(position);
+                double position = ascomToFocuserValue(stepPosition);
+                _ = _focuser.MoveTo(position);
                 return null;
             });
 
+        }
 
+        private int focuserToAscomValue(double position)
+        {
+            return (int)Math.Round(position * 100.0);
+        }
+
+        private double ascomToFocuserValue(int position)
+        {
+            return (double)(position / 100.0m);
+        }
+
+
+    }
+
+    public class StateValue
+    {
+        [JsonInclude]
+        [JsonPropertyName("Name")]
+        public string Name;
+
+        [JsonInclude]
+        [JsonPropertyName("Value")]
+        public object Value;
+
+        public StateValue(string name, object value)
+        {
+            Name = name;
+            Value = value;
         }
     }
 

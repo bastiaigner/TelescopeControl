@@ -39,10 +39,9 @@
             label4 = new System.Windows.Forms.Label();
             groupBox = new System.Windows.Forms.GroupBox();
             groupBox1 = new System.Windows.Forms.GroupBox();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            comboBox_coverState = new System.Windows.Forms.ComboBox();
             button_closecovers = new System.Windows.Forms.Button();
             button_opencovers = new System.Windows.Forms.Button();
-            label6 = new System.Windows.Forms.Label();
             timer_refresh = new System.Windows.Forms.Timer(components);
             groupBox2 = new System.Windows.Forms.GroupBox();
             button_primFocus = new System.Windows.Forms.Button();
@@ -153,7 +152,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(comboBox_coverState);
             groupBox1.Controls.Add(button_closecovers);
             groupBox1.Controls.Add(button_opencovers);
             groupBox1.Location = new System.Drawing.Point(616, 46);
@@ -165,14 +164,15 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Covers";
             // 
-            // comboBox1
+            // comboBox_coverState
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(27, 55);
-            comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(359, 40);
-            comboBox1.TabIndex = 6;
+            comboBox_coverState.FormattingEnabled = true;
+            comboBox_coverState.Location = new System.Drawing.Point(27, 55);
+            comboBox_coverState.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            comboBox_coverState.Name = "comboBox_coverState";
+            comboBox_coverState.Size = new System.Drawing.Size(359, 40);
+            comboBox_coverState.TabIndex = 6;
+            comboBox_coverState.SelectionChangeCommitted += comboBox_coverState_SelectionChangeCommitted;
             // 
             // button_closecovers
             // 
@@ -195,15 +195,6 @@
             button_opencovers.Text = "Open Covers";
             button_opencovers.UseVisualStyleBackColor = true;
             button_opencovers.Click += button_opencovers_Click;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(611, 379);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(378, 32);
-            label6.TabIndex = 8;
-            label6.Text = "Telescope PLC: 10.24.4.3 (S7-1200)";
             // 
             // timer_refresh
             // 
@@ -251,7 +242,6 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1092, 732);
             Controls.Add(groupBox2);
-            Controls.Add(label6);
             Controls.Add(groupBox1);
             Controls.Add(groupBox);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -264,7 +254,6 @@
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -281,9 +270,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button_opencovers;
         private System.Windows.Forms.Button button_closecovers;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer timer_refresh;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox_coverState;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button_cassFocus;
         private System.Windows.Forms.Button button_primFocus;

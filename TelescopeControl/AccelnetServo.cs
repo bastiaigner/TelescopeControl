@@ -8,14 +8,15 @@ using CMLCOMLib;
 
 namespace TelescopeControl
 {
-    internal class AccelnetServo : IAbsoluteServo
+    internal class AccelnetServo : IAbsoluteServo, IDisposable
     {
 
         canOpenObj canOpen;
         CopleyMotionLibraryObj cmlObj;
         AmpObj axisAmpObj;
 
-        Object moveLock = new Object();
+        private int countsPerUnit;
+
 
         public bool Enabled
         {
@@ -40,6 +41,10 @@ namespace TelescopeControl
         public AccelnetServo(String canInterface, short canAddress, int countsPerUnit)
         {
             cmlObj = new CopleyMotionLibraryObj();
+
+            const int LOG_ALL = 99;
+            cmlObj.DebugLevel = LOG_ALL;
+
             axisAmpObj = new AmpObj();
             canOpen = new canOpenObj();
 
@@ -48,17 +53,24 @@ namespace TelescopeControl
 
             canOpen.Initialize();
 
-            axisAmpObj.CountsPerUnit = countsPerUnit;
+            var ampSettings = new ampSettingsObj();
+            ampSettings.guardTime = 0;
 
-            axisAmpObj.Initialize(canOpen, canAddress);
+            //axisAmpObj.CountsPerUnit = countsPerUnit;
+            axisAmpObj.InitializeExt(canOpen, canAddress, ampSettings);
+
+    
             
+
+            this.countsPerUnit = countsPerUnit;
+
         }
 
 
         public double minPosition {
             get
             {
-                return axisAmpObj.SoftPositionPosLimit;
+                return axisAmpObj.SoftPositionNegLimit / countsPerUnit;
             }
         }
         
@@ -66,7 +78,7 @@ namespace TelescopeControl
         {
             get
             {
-                return axisAmpObj.SoftPositionPosLimit;
+                return axisAmpObj.SoftPositionPosLimit / countsPerUnit;
             }
         }
 
@@ -74,11 +86,19 @@ namespace TelescopeControl
         {
             get
             {
-                return axisAmpObj.PositionActual;
+                return axisAmpObj.PositionActual / countsPerUnit;
             }
         }
 
-        public bool isMoving => throw new NotImplementedException();
+        public bool isMoving
+        {
+            get
+            {
+                CML_EVENT_STATUS eventStatus = 0;
+                axisAmpObj.ReadEventStatus(ref eventStatus);
+                return (eventStatus & CML_EVENT_STATUS.EVENT_STATUS_MOVING) == CML_EVENT_STATUS.EVENT_STATUS_MOVING;
+            }
+        }
 
         public void Halt()
         {
@@ -88,19 +108,14 @@ namespace TelescopeControl
 
         async public Task MoveTo(double position)
         {
-            await Task.Run(() =>
-            {
-                lock(moveLock)
-                {
-                    axisAmpObj.MoveAbs(position);
-                    axisAmpObj.WaitMoveDone(60_000);
-                }
-            });
+            axisAmpObj.MoveAbs(position * countsPerUnit);
         }
 
-        ~AccelnetServo()
+        public void Dispose()
         {
             Enabled = false;
+
+            canOpen.Close();
         }
     }
 }

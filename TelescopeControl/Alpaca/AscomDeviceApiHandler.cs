@@ -20,10 +20,7 @@ public abstract class AscomDeviceApiHandler
 
     public void RegisterCommonRoutes(WebApplication app)
     {
-        RegisterRoute(app, "GET", "name", (request) =>
-        {
-            return "testing";
-        });
+
     }
 
     private string BuildPath(string path)

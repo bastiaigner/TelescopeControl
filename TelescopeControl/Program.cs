@@ -20,7 +20,8 @@ namespace TelescopeControl
             var AlpacaServer = new AlpacaServer([
                 new AscomFocuserApiHandler(0, TelescopeFocusers.cassegrainFocuser),
                 new AscomFocuserApiHandler(1, TelescopeFocusers.primaryFocuser)
-            ]);
+            ],
+            Properties.Settings.Default.AlpacaServer);
 
             var tokenSource = new CancellationTokenSource();
 

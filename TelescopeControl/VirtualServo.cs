@@ -19,7 +19,13 @@ namespace TelescopeControl
 
         public double currentPosition { get; private set; } = 20.0;
 
-        public bool isMoving { get; private set; } = false;
+        public bool isMoving
+        {
+            get
+            {
+                return Enabled && Math.Abs(targetPosition - currentPosition) > positionThreshold;
+            }
+        }
 
         private bool haltRequested = false;
 
@@ -63,7 +69,6 @@ namespace TelescopeControl
                 if (haltRequested)
                 {
                     haltRequested = false;
-                    isMoving = false;
                     targetPosition = currentPosition;
                     continue;
                 }
@@ -75,12 +80,7 @@ namespace TelescopeControl
                         step = -step;
                     }
 
-                    isMoving = true;
                     currentPosition += step;
-                }
-                else
-                {
-                    isMoving = false;
                 }
                 Thread.Sleep(100);
             }

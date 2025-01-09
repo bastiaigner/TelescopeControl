@@ -7,9 +7,16 @@ namespace TelescopeControl.Alpaca.Response
     {
         private Exception _exception;
 
+        [JsonPropertyName("ClientTransactionID")]
         public uint ClientTransactionID { get; set; }
+
+        [JsonPropertyName("ServerTransactionID")]
         public uint ServerTransactionID { get; set; }
+
+        [JsonPropertyName("ErrorNumber")]
         public int ErrorNumber { get; set; } = 0;
+
+        [JsonPropertyName("ErrorMessage")]
         public string ErrorMessage { get; set; } = "";
 
         [JsonIgnore]

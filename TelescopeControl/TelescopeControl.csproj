@@ -9,10 +9,28 @@
 
   <ItemGroup>
     <PackageReference Include="S7netplus" Version="0.20.0" />
-	  <Reference Include="CMO">
-		  <HintPath>CMO.dll</HintPath>
-	  </Reference>
 	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CMO">
+      <HintPath>..\..\..\..\..\..\Program Files\Copley Motion\CMO\CMO.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 

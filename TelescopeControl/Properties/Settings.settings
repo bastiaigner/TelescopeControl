@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TelescopeControl.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AlpacaServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:11111</Value>
+    </Setting>
+    <Setting Name="PLCHost" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">10.24.4.3</Value>
+    </Setting>
+    <Setting Name="CANInterface" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">kvaser0</Value>
+    </Setting>
+    <Setting Name="CANNodeCassegrainFocuser" Type="System.UInt16" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CANNodePrimaryFocuser" Type="System.UInt16" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="CassegrainFocuserCountsToMM" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">360</Value>
+    </Setting>
+    <Setting Name="PrimaryFocuserCountsToMM" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

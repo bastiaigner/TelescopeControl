@@ -14,10 +14,10 @@ namespace TelescopeControl.Alpaca
     {
         private readonly WebApplication _app;
 
-        public AlpacaServer(AscomDeviceApiHandler[] handlers)
+        public AlpacaServer(AscomDeviceApiHandler[] handlers, string host = "http://localhost:11111")
         {
             var builder = WebApplication.CreateBuilder();
-            builder.WebHost.UseUrls("http://localhost:8080");
+            builder.WebHost.UseUrls(host);
 
             _app = builder.Build();
 
