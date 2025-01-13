@@ -42,8 +42,8 @@ namespace TelescopeControl
         {
             cmlObj = new CopleyMotionLibraryObj();
 
-            const int LOG_ALL = 99;
-            cmlObj.DebugLevel = LOG_ALL;
+            //const int LOG_ALL = 99;
+            //cmlObj.DebugLevel = LOG_ALL;
 
             axisAmpObj = new AmpObj();
             canOpen = new canOpenObj();
