@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using TelescopeControl.Alpaca.Exceptions;
 
 namespace TelescopeControl.Alpaca.Response
 {
@@ -26,16 +27,12 @@ namespace TelescopeControl.Alpaca.Response
             set
             {
                 _exception = value;
-                if (_exception != null)
+               // If exception is an AlpacaException, carry over errorcode and errormessage
+               if (_exception.GetType().IsSubclassOf(typeof(AlpacaException)))
                 {
-                    ErrorNumber = _exception.HResult;
-                    ErrorMessage = _exception.Message;
-
-                    if (ErrorNumber >= ErrorConstants.ASCOM_ERROR_NUMBER_BASE &&
-                        ErrorNumber <= ErrorConstants.ASCOM_ERROR_NUMBER_MAX)
-                    {
-                        ErrorNumber -= ErrorConstants.ASCOM_ERROR_NUMBER_OFFSET;
-                    }
+                    AlpacaException exc = (AlpacaException)value;
+                    ErrorNumber = exc.ErrorCode;
+                    ErrorMessage = exc.ErrorMessage;
                 }
             }
         }

@@ -198,7 +198,7 @@
             // 
             // timer_refresh
             // 
-            timer_refresh.Interval = 2500;
+            timer_refresh.Interval = 1000;
             timer_refresh.Tick += timer_refresh_Tick;
             // 
             // groupBox2

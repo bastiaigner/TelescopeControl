@@ -19,7 +19,8 @@ namespace TelescopeControl
 
             var AlpacaServer = new AlpacaServer([
                 new AscomFocuserApiHandler(0, TelescopeFocusers.cassegrainFocuser),
-                new AscomFocuserApiHandler(1, TelescopeFocusers.primaryFocuser)
+                new AscomFocuserApiHandler(1, TelescopeFocusers.primaryFocuser),
+                new AscomCoverCalibratorApiHandler(0, TelescopePLC.Instance),
             ],
             Properties.Settings.Default.AlpacaServer);
 

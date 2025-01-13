@@ -53,6 +53,9 @@ namespace TelescopeControl
             comboBox_coverState.SelectedItem = TelescopePLC.Instance.ReadFlapState();
             comboBox_coverState.Enabled = plc.GetFlapIsAutomaticMode();
 
+            FlapMovingState flapMovingState = plc.ReadFlapMovingState();
+            comboBox_coverState.BackColor = flapMovingState.IsMoving ? Color.LightGreen : Color.White;
+
         }
         private void timer_refresh_Tick(object sender, EventArgs e)
         {

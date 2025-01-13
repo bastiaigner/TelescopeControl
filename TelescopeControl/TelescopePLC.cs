@@ -7,6 +7,8 @@ using S7.Net;
 using System.Configuration;
 using TelescopeControl.Properties;
 using System.ComponentModel;
+using System.Reflection.Metadata.Ecma335;
+using System.Collections;
 
 namespace TelescopeControl
 {
@@ -19,8 +21,23 @@ namespace TelescopeControl
         public double EnvironmentHumidity;
     }
 
+    public struct FlapMovingState
+    {
+        public bool FlapM1Open;
+        public bool FlapM1Close;
+        public bool FlapM2Open;
+        public bool FlapM2Close;
+        public bool MirrorDoorLeftOpen;
+        public bool MirrorDoorLeftClose;
+        public bool MirrorDoorRightOpen;
+        public bool MirrorDoorRightClose;
 
+        public bool IsMoving
+        {
+            get { return FlapM1Open || FlapM1Close || FlapM2Open || FlapM2Close || MirrorDoorLeftOpen || MirrorDoorLeftClose || MirrorDoorRightOpen || MirrorDoorRightClose; }
+        }
 
+    }
 
 
 
@@ -29,13 +46,13 @@ namespace TelescopeControl
 
         public static TelescopePLC Instance { get; } = new TelescopePLC(Properties.Settings.Default.PLCHost);
 
-        private string hostname;
-        private bool connected;
+        public string hostname { get; private set; }
+        public bool connected { get; private set; }
 
         private Plc plc;
 
         private AnalogValues _analogValues;
-        private DateTime _lastReadTime;
+        private DateTime _lastAnalogValuesReadTime;
 
 
 
@@ -132,16 +149,42 @@ namespace TelescopeControl
                 EnvironmentHumidity = (double)((float[])result)[3]
             };
 
-            this._lastReadTime = DateTime.Now;
+            this._lastAnalogValuesReadTime = DateTime.Now;
+        }
+
+        public FlapMovingState ReadFlapMovingState()
+        {
+            BitArray data = (BitArray)plc.Read(DataType.Output, 53, 0, VarType.Bit, 8);
+            if (data == null)
+            {
+                throw new Exception("Failed to read value from PLC");
+            }
+
+            FlapMovingState state = new FlapMovingState
+            {
+                FlapM1Open = (bool)data[0],
+                FlapM1Close = (bool)data[1],
+                FlapM2Open = (bool)data[2],
+                FlapM2Close = (bool)data[3],
+                MirrorDoorLeftOpen = (bool)data[4],
+                MirrorDoorLeftClose = (bool)data[5],
+                MirrorDoorRightOpen = (bool)data[6],
+                MirrorDoorRightClose = (bool)data[7]
+            };
+
+            return state;
+
         }
 
         private void maybeRefreshAnalogValues()
         {
-            if (DateTime.Now - _lastReadTime > TimeSpan.FromSeconds(1))
+            if (DateTime.Now - _lastAnalogValuesReadTime > TimeSpan.FromSeconds(1))
             {
                 refreshAnalogValues();
             }
         }
+
+
 
         public void Dispose()
         {
