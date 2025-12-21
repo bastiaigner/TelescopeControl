@@ -157,8 +157,9 @@ namespace TelescopeControl
                 return null;
             });
 
-            RegisterRoute<object>(app, "PUT", "action", (request) =>
+            RegisterRoute(app, "PUT", "action", (request) =>
             {
+
                 string actionName = request.Form["Action"];
                 if (actionName == "calibrate-temperature")
                 {
@@ -172,7 +173,8 @@ namespace TelescopeControl
                 {
                     throw new InvalidOperationException("Unknown action: " + actionName);
                 }
-                return null;
+                return "ok";
+
             });
 
         }
