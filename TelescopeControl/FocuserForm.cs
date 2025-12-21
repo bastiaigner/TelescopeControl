@@ -25,6 +25,11 @@ namespace TelescopeControl
             this.Text = focuser.name + " (" + focuser.servo.GetType().Name + ")";
 
             timer_refreshUI.Start();
+
+            if (!focuser.IsHomed)
+            {
+                MessageBox.Show("Warning: The focuser servo has not been homed. Please home the servo before use.", "Focuser Not Homed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void refreshFocuserValues()
@@ -64,6 +69,8 @@ namespace TelescopeControl
             checkBox_enabled.Checked = focuser.Enabled;
             trackBar_position.Enabled = focuser.Enabled;
 
+            label_homingStatus.Text = focuser.IsHomed ? "Servo Homed" : "Needs Homing!";
+
         }
 
         private void MoveToPosition(double position)
@@ -83,7 +90,7 @@ namespace TelescopeControl
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            
+
         }
 
         private String formatPosition(double position)
@@ -147,6 +154,26 @@ namespace TelescopeControl
         private void checkBox_enabled_CheckedChanged(object sender, EventArgs e)
         {
             focuser.Enabled = ((CheckBox)sender).Checked;
+        }
+
+        private void button_homeServo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Task homeTask = focuser.Home();
+                homeTask.ContinueWith((t) => 
+                {
+                    if (t.IsFaulted)
+                    {
+                        MessageBox.Show("Error: " + t.Exception.Message);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
         }
     }
 }

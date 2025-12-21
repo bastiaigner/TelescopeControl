@@ -19,6 +19,7 @@ namespace TelescopeControl
 
         public double currentPosition { get; private set; } = 20.0;
 
+        public bool IsHomed => true;
         public bool isMoving
         {
             get
@@ -108,6 +109,11 @@ namespace TelescopeControl
         public void Halt()
         {
             haltRequested = true;
+        }
+
+        public Task Home()
+        {
+            throw new NotImplementedException("Virtual servo does not support homing");
         }
     }
 }

@@ -70,7 +70,7 @@ namespace TelescopeControl
 
             RegisterRoute<string[]>(app, "GET", "supportedactions", (request) =>
             {
-                return [];
+                return ["calibrate-temperature", "compensate-temperature"];
             });
 
             RegisterRoute(app, "GET", "driverinfo", (request) =>
@@ -154,6 +154,24 @@ namespace TelescopeControl
                 int stepPosition = int.Parse(request.Form["Position"]);
                 double position = ascomToFocuserValue(stepPosition);
                 _ = _focuser.MoveTo(position);
+                return null;
+            });
+
+            RegisterRoute<object>(app, "PUT", "action", (request) =>
+            {
+                string actionName = request.Form["Action"];
+                if (actionName == "calibrate-temperature")
+                {
+                    _focuser.CalibrateTemperature();
+                }
+                else if (actionName == "compensate-temperature")
+                {
+                    _focuser.MoveToCompensateTemperature();
+                }
+                else
+                {
+                    throw new InvalidOperationException("Unknown action: " + actionName);
+                }
                 return null;
             });
 

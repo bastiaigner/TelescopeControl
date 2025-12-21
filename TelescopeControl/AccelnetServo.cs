@@ -17,6 +17,13 @@ namespace TelescopeControl
 
         private int countsPerUnit;
 
+        public bool IsHomed
+        {
+            get
+            {
+                return axisAmpObj.IsReferenced;
+            }
+        }
 
         public bool Enabled
         {
@@ -116,6 +123,11 @@ namespace TelescopeControl
             Enabled = false;
 
             canOpen.Close();
+        }
+
+        async public Task Home()
+        {
+            axisAmpObj.GoHome();
         }
     }
 }

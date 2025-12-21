@@ -17,5 +17,9 @@ namespace TelescopeControl
         void Halt();
         bool Enabled { get; set; }
 
+        bool IsHomed { get; }
+
+        Task Home();
+
     }
 }

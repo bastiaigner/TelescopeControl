@@ -51,6 +51,8 @@
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             checkBox_enabled = new System.Windows.Forms.CheckBox();
+            label_homingStatus = new System.Windows.Forms.Label();
+            button_homeServo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)trackBar_position).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -103,9 +105,9 @@
             // button_halt
             // 
             button_halt.BackColor = System.Drawing.Color.Red;
-            button_halt.Location = new System.Drawing.Point(37, 300);
+            button_halt.Location = new System.Drawing.Point(23, 252);
             button_halt.Name = "button_halt";
-            button_halt.Size = new System.Drawing.Size(182, 150);
+            button_halt.Size = new System.Drawing.Size(182, 154);
             button_halt.TabIndex = 4;
             button_halt.Text = "Halt";
             button_halt.UseVisualStyleBackColor = false;
@@ -225,7 +227,6 @@
             // checkBox_continuosCompensation
             // 
             checkBox_continuosCompensation.AutoSize = true;
-            checkBox_continuosCompensation.Enabled = false;
             checkBox_continuosCompensation.Location = new System.Drawing.Point(34, 444);
             checkBox_continuosCompensation.Name = "checkBox_continuosCompensation";
             checkBox_continuosCompensation.Size = new System.Drawing.Size(178, 36);
@@ -273,7 +274,7 @@
             // checkBox_enabled
             // 
             checkBox_enabled.AutoSize = true;
-            checkBox_enabled.Location = new System.Drawing.Point(47, 214);
+            checkBox_enabled.Location = new System.Drawing.Point(30, 204);
             checkBox_enabled.Name = "checkBox_enabled";
             checkBox_enabled.Size = new System.Drawing.Size(131, 36);
             checkBox_enabled.TabIndex = 8;
@@ -281,11 +282,33 @@
             checkBox_enabled.UseVisualStyleBackColor = true;
             checkBox_enabled.CheckedChanged += checkBox_enabled_CheckedChanged;
             // 
+            // label_homingStatus
+            // 
+            label_homingStatus.AutoSize = true;
+            label_homingStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            label_homingStatus.Location = new System.Drawing.Point(30, 526);
+            label_homingStatus.Name = "label_homingStatus";
+            label_homingStatus.Size = new System.Drawing.Size(192, 32);
+            label_homingStatus.TabIndex = 9;
+            label_homingStatus.Text = "Needs Homing!";
+            // 
+            // button_homeServo
+            // 
+            button_homeServo.Location = new System.Drawing.Point(30, 572);
+            button_homeServo.Name = "button_homeServo";
+            button_homeServo.Size = new System.Drawing.Size(175, 46);
+            button_homeServo.TabIndex = 10;
+            button_homeServo.Text = "Home Servo";
+            button_homeServo.UseVisualStyleBackColor = true;
+            button_homeServo.Click += button_homeServo_Click;
+            // 
             // FocuserForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(867, 800);
+            Controls.Add(button_homeServo);
+            Controls.Add(label_homingStatus);
             Controls.Add(checkBox_enabled);
             Controls.Add(groupBox1);
             Controls.Add(textBox_focusPosition);
@@ -327,5 +350,7 @@
         private System.Windows.Forms.Button button_calibrateNow;
         private System.Windows.Forms.CheckBox checkBox_calibrateOnMove;
         private System.Windows.Forms.CheckBox checkBox_enabled;
+        private System.Windows.Forms.Label label_homingStatus;
+        private System.Windows.Forms.Button button_homeServo;
     }
 }

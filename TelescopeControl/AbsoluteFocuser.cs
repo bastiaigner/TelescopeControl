@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace TelescopeControl
 {
@@ -10,6 +11,8 @@ namespace TelescopeControl
     {
         public IAbsoluteServo servo { get; private set; }
         private IFocuserTemperatureSource temperatureSource;
+
+        private Timer temperatureCompensationTimer;
 
         public String name { get; private set; }
 
@@ -20,7 +23,23 @@ namespace TelescopeControl
             this.temperatureSource = temperatureSource;
 
             this.servo.Enabled = true;
+
+            temperatureCompensationTimer = new Timer(1000 * 60 * 3); // Check every three minutes
+            temperatureCompensationTimer.Elapsed += TemperatureCompensationTimer_Elapsed;
+            temperatureCompensationTimer.AutoReset = true;
+
         }
+
+        private void TemperatureCompensationTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (continuousTemperatureCompensation && Enabled && !isMoving)
+            {
+                MoveToCompensateTemperature().Wait();
+            }
+        }
+
+
+
 
         public async Task MoveTo(double position, bool withoutTemperatureRecalibration=false)
         {
@@ -51,8 +70,16 @@ namespace TelescopeControl
         {
             get { return servo.Enabled; }
             set
-            {
+            {   
                 servo.Enabled = value;
+
+                if (value)
+                {
+                    temperatureCompensationTimer.Start();
+                } else
+                {
+                    temperatureCompensationTimer.Stop();
+                }
             }
         }
         public double minPosition => servo.minPosition;
@@ -62,6 +89,13 @@ namespace TelescopeControl
         public double currentPosition => servo.currentPosition;
 
         public bool isMoving => servo.isMoving;
+
+        public bool IsHomed => servo.IsHomed;
+
+        public async Task Home()
+        {
+            await servo.Home();
+        }
 
         // Rate in mm/deg C by which the focuser position changes with temperature
         public double temperatureCompensationRate = 0.0;
