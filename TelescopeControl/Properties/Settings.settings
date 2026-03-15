@@ -23,5 +23,23 @@
     <Setting Name="PrimaryFocuserCountsToMM" Type="System.UInt32" Scope="Application">
       <Value Profile="(Default)">500</Value>
     </Setting>
+    <Setting Name="CassegrainCompensationRate" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CassegrainContinuousCompensation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CassegrainCalibrateOnMove" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PrimaryCompensationRate" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PrimaryContinuousCompensation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PrimaryCalibrateOnMove" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

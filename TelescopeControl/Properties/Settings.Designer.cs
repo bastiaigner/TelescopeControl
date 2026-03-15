@@ -85,5 +85,77 @@ namespace TelescopeControl.Properties {
                 return ((uint)(this["PrimaryFocuserCountsToMM"]));
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double CassegrainCompensationRate {
+            get {
+                return ((double)(this["CassegrainCompensationRate"]));
+            }
+            set {
+                this["CassegrainCompensationRate"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CassegrainContinuousCompensation {
+            get {
+                return ((bool)(this["CassegrainContinuousCompensation"]));
+            }
+            set {
+                this["CassegrainContinuousCompensation"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CassegrainCalibrateOnMove {
+            get {
+                return ((bool)(this["CassegrainCalibrateOnMove"]));
+            }
+            set {
+                this["CassegrainCalibrateOnMove"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double PrimaryCompensationRate {
+            get {
+                return ((double)(this["PrimaryCompensationRate"]));
+            }
+            set {
+                this["PrimaryCompensationRate"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PrimaryContinuousCompensation {
+            get {
+                return ((bool)(this["PrimaryContinuousCompensation"]));
+            }
+            set {
+                this["PrimaryContinuousCompensation"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PrimaryCalibrateOnMove {
+            get {
+                return ((bool)(this["PrimaryCalibrateOnMove"]));
+            }
+            set {
+                this["PrimaryCalibrateOnMove"] = value;
+            }
+        }
     }
 }

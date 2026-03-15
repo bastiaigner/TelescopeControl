@@ -19,6 +19,18 @@ namespace TelescopeControl
         {
             InitializeComponent();
             comboBox_coverState.DataSource = Enum.GetValues(typeof(FlapState));
+            this.FormClosing += MainForm_FormClosing;
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.CassegrainCompensationRate = TelescopeFocusers.cassegrainFocuser.temperatureCompensationRate;
+            Properties.Settings.Default.CassegrainContinuousCompensation = TelescopeFocusers.cassegrainFocuser.continuousTemperatureCompensation;
+            Properties.Settings.Default.CassegrainCalibrateOnMove = TelescopeFocusers.cassegrainFocuser.calibrateOnMove;
+            Properties.Settings.Default.PrimaryCompensationRate = TelescopeFocusers.primaryFocuser.temperatureCompensationRate;
+            Properties.Settings.Default.PrimaryContinuousCompensation = TelescopeFocusers.primaryFocuser.continuousTemperatureCompensation;
+            Properties.Settings.Default.PrimaryCalibrateOnMove = TelescopeFocusers.primaryFocuser.calibrateOnMove;
+            Properties.Settings.Default.Save();
         }
 
 
@@ -49,6 +61,13 @@ namespace TelescopeControl
             textBox_envhum.Text = String.Format("{0:00} %", plc.ReadEnvironmentHumidity());
             textBox_m1temp.Text = String.Format("{0:00.0} °C", plc.ReadM1Temperature());
             textBox_m1celltemp.Text = String.Format("{0:00.0} °C", plc.ReadMirrorCellTemperature());
+            textBox_trussTempTL.Text = String.Format("{0:00.0} °C", plc.ReadTrussTempTopLeft());
+            textBox_trussTempBR.Text = String.Format("{0:00.0} °C", plc.ReadTrussTempBottomRight());
+            textBox_trussMeanTemp.Text = String.Format("{0:00.0} °C", plc.ReadTrussMeanTemperature());
+            textBox_haAngle.Text = String.Format("{0:0}°", plc.ReadHAAngle());
+            textBox_decAngle.Text = String.Format("{0:0}°", plc.ReadDECAngle());
+            textBox_altitude.Text = String.Format("{0:0}°", plc.ReadAltitude());
+            textBox_azimuth.Text = String.Format("{0:0}°", plc.ReadAzimuth());
 
             comboBox_coverState.SelectedItem = TelescopePLC.Instance.ReadFlapState();
             comboBox_coverState.Enabled = plc.GetFlapIsAutomaticMode();
