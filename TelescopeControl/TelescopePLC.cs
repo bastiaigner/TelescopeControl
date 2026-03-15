@@ -19,6 +19,12 @@ namespace TelescopeControl
         public double MirrorCellTemperature;
         public double EnvironmentTemperature;
         public double EnvironmentHumidity;
+        public double HAAngle;
+        public double DECAngle;
+        public double Altitude;
+        public double Azimuth;
+        public double TrussTempTopLeft;
+        public double TrussTempBottomRight;
     }
 
     public struct FlapMovingState
@@ -99,6 +105,48 @@ namespace TelescopeControl
             return _analogValues.M1Temperature;
         }
 
+        public double ReadHAAngle()
+        {
+            maybeRefreshAnalogValues();
+            return _analogValues.HAAngle;
+        }
+
+        public double ReadDECAngle()
+        {
+            maybeRefreshAnalogValues();
+            return _analogValues.DECAngle;
+        }
+
+        public double ReadAltitude()
+        {
+            maybeRefreshAnalogValues();
+            return _analogValues.Altitude;
+        }
+
+        public double ReadAzimuth()
+        {
+            maybeRefreshAnalogValues();
+            return _analogValues.Azimuth;
+        }
+
+        public double ReadTrussTempTopLeft()
+        {
+            maybeRefreshAnalogValues();
+            return _analogValues.TrussTempTopLeft;
+        }
+
+        public double ReadTrussTempBottomRight()
+        {
+            maybeRefreshAnalogValues();
+            return _analogValues.TrussTempBottomRight;
+        }
+
+        public double ReadTrussMeanTemperature()
+        {
+            maybeRefreshAnalogValues();
+            return (_analogValues.TrussTempTopLeft + _analogValues.TrussTempBottomRight) / 2.0;
+        }
+
         public FlapState ReadFlapState()
         {
             var result = plc.Read(DataType.DataBlock, 2, 0, VarType.Int, 1);
@@ -135,18 +183,25 @@ namespace TelescopeControl
 
         private void refreshAnalogValues()
         {
-            var result = plc.Read(DataType.DataBlock, 5, 0, VarType.Real, 4);
+            var result = plc.Read(DataType.DataBlock, 5, 0, VarType.Real, 10);
             if (result == null)
             {
                 throw new Exception("Failed to read value from PLC");
             }
 
+            var values = (float[])result;
             this._analogValues = new AnalogValues
             {
-                M1Temperature = (double)((float[])result)[0],
-                MirrorCellTemperature = (double)((float[])result)[1],
-                EnvironmentTemperature = (double)((float[])result)[2],
-                EnvironmentHumidity = (double)((float[])result)[3]
+                M1Temperature = (double)values[0],
+                MirrorCellTemperature = (double)values[1],
+                EnvironmentTemperature = (double)values[2],
+                EnvironmentHumidity = (double)values[3],
+                HAAngle = (double)values[4],
+                DECAngle = (double)values[5],
+                Altitude = (double)values[6],
+                Azimuth = (double)values[7],
+                TrussTempTopLeft = (double)values[8],
+                TrussTempBottomRight = (double)values[9]
             };
 
             this._lastAnalogValuesReadTime = DateTime.Now;

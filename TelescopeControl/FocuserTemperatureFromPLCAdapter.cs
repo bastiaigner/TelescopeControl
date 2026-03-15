@@ -26,7 +26,7 @@ namespace TelescopeControl
                 if (DateTime.Now - lastReadTime > TimeSpan.FromSeconds(refreshInterval))
                 {
                     lastReadTime = DateTime.Now;
-                    lastReadValue = plc.ReadEnvironmentTemperature();
+                    lastReadValue = plc.ReadTrussMeanTemperature();
                 }
                 return lastReadValue;
             }

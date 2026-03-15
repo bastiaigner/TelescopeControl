@@ -146,7 +146,7 @@ namespace TelescopeControlAutoslew
             }
         }
 
-        public short InstalledTempSensors => 3;
+        public short InstalledTempSensors => 5;
 
         public void Close()
         {
@@ -161,6 +161,10 @@ namespace TelescopeControlAutoslew
                    return plc.ReadEnvironmentTemperature();
                 case 2:
                     return plc.ReadM1Temperature();
+                case 3:
+                    return plc.ReadTrussTempTopLeft();
+                case 4:
+                    return plc.ReadTrussTempBottomRight();
                 default:
                     throw new System.NotImplementedException();
             }
