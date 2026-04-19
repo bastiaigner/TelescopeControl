@@ -57,7 +57,7 @@ namespace TelescopeControl
             await servo.MoveTo(position);
             if (calibrateOnMove && !withoutTemperatureRecalibration)
             {
-                CalibrateTemperature();
+                CalibrateTemperature(position);
             }
         }
         
@@ -136,9 +136,9 @@ namespace TelescopeControl
           
         }
 
-        public void CalibrateTemperature()
+        public void CalibrateTemperature(double? atPosition = null)
         {
-            originalSetPosition = currentPosition;
+            originalSetPosition = atPosition ?? currentPosition;
             originalTemperature = currentTemperature;
         }
 

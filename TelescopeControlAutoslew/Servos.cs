@@ -12,9 +12,13 @@ namespace TelescopeControlAutoslew
     {
         public bool CoversInstalled => true;
 
-        public bool FansInstalled => false;
+        public bool FansInstalled => true;
 
-        public int FanSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int FanSpeed
+        {
+            get => TelescopeControl.TelescopePLC.Instance.ReadFanSpeed();
+            set => TelescopeControl.TelescopePLC.Instance.SetFanSpeed(value);
+        }
 
         public bool Init
         {

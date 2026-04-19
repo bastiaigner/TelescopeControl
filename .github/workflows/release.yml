@@ -1,0 +1,28 @@
+name: Build and Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish win-x64
+        run: dotnet publish TelescopeControl/TelescopeControl.csproj -c Release -r win-x64 --self-contained -o publish
+
+      - name: Zip release
+        run: Compress-Archive -Path publish/* -DestinationPath TelescopeControl-win-x64.zip
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: TelescopeControl-win-x64.zip

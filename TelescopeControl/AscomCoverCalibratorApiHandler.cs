@@ -65,7 +65,7 @@ namespace TelescopeControl
 
             RegisterRoute<string[]>(app, "GET", "supportedactions", (request) =>
             {
-                return [];
+                return ["fanspeed"];
             });
 
             RegisterRoute(app, "GET", "driverinfo", (request) =>
@@ -150,11 +150,28 @@ namespace TelescopeControl
             });
 
 
+            RegisterRoute(app, "GET", "fanspeed", (request) =>
+            {
+                return _plc.ReadFanSpeed();
+            });
+
+            RegisterRoute<object>(app, "PUT", "fanspeed", (request) =>
+            {
+                int rpm = int.Parse(request.Form["Value"]);
+                if (rpm != 0 && (rpm < 900 || rpm > 4000))
+                {
+                    throw new AlpacaException(0x401, "Fan speed must be 0 (off) or between 900 and 4000 RPM");
+                }
+                _plc.SetFanSpeed(rpm);
+                return null;
+            });
+
             RegisterRoute<StateValue[]>(app, "GET", "devicestate", (request) =>
             {
                 return [
                         new StateValue("CoverState",  getCoverState()),
-                        new StateValue("CoverMoving", getIsCoverMoving())
+                        new StateValue("CoverMoving", getIsCoverMoving()),
+                        new StateValue("FanSpeed", _plc.ReadFanSpeed())
                     ];
             });
 

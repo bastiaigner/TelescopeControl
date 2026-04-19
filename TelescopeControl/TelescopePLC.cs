@@ -174,6 +174,19 @@ namespace TelescopeControl
             return (bool)result;
         }
 
+        public int ReadFanSpeed()
+        {
+            var result = plc.Read(DataType.DataBlock, 2, 4, VarType.Int, 1);
+            if (result == null)
+                throw new Exception("Failed to read value from PLC");
+            return (short)result;
+        }
+
+        public void SetFanSpeed(int rpm)
+        {
+            plc.Write(DataType.DataBlock, 2, 4, (short)rpm);
+        }
+
         public void SetFlapIsAutomaticMode(bool value)
         {
             throw new Exception("Not implemented for now (for safety reasons)");

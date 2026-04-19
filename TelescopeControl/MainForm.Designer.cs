@@ -61,10 +61,16 @@
             textBox_altitude = new System.Windows.Forms.TextBox();
             label_azimuth = new System.Windows.Forms.Label();
             textBox_azimuth = new System.Windows.Forms.TextBox();
+            groupBox4 = new System.Windows.Forms.GroupBox();
+            trackBar_fanSpeed = new System.Windows.Forms.TrackBar();
+            label_fanSpeed = new System.Windows.Forms.Label();
+            label_fanSpeedValue = new System.Windows.Forms.Label();
             groupBox.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(trackBar_fanSpeed)).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -283,6 +289,51 @@
             timer_refresh.Interval = 1000;
             timer_refresh.Tick += timer_refresh_Tick;
             //
+            // groupBox4 (Fans)
+            //
+            // label_fanSpeed
+            //
+            label_fanSpeed.AutoSize = true;
+            label_fanSpeed.Location = new System.Drawing.Point(27, 40);
+            label_fanSpeed.Name = "label_fanSpeed";
+            label_fanSpeed.Size = new System.Drawing.Size(120, 32);
+            label_fanSpeed.TabIndex = 0;
+            label_fanSpeed.Text = "Fan Speed";
+            //
+            // label_fanSpeedValue
+            //
+            label_fanSpeedValue.AutoSize = true;
+            label_fanSpeedValue.Location = new System.Drawing.Point(300, 40);
+            label_fanSpeedValue.Name = "label_fanSpeedValue";
+            label_fanSpeedValue.Size = new System.Drawing.Size(50, 32);
+            label_fanSpeedValue.TabIndex = 1;
+            label_fanSpeedValue.Text = "Off";
+            //
+            // trackBar_fanSpeed
+            //
+            trackBar_fanSpeed.Location = new System.Drawing.Point(27, 80);
+            trackBar_fanSpeed.Maximum = 4000;
+            trackBar_fanSpeed.Minimum = 0;
+            trackBar_fanSpeed.Name = "trackBar_fanSpeed";
+            trackBar_fanSpeed.Size = new System.Drawing.Size(359, 90);
+            trackBar_fanSpeed.SmallChange = 100;
+            trackBar_fanSpeed.LargeChange = 500;
+            trackBar_fanSpeed.TickFrequency = 100;
+            trackBar_fanSpeed.TabIndex = 2;
+            trackBar_fanSpeed.Scroll += trackBar_fanSpeed_Scroll;
+            //
+            groupBox4.Controls.Add(label_fanSpeed);
+            groupBox4.Controls.Add(label_fanSpeedValue);
+            groupBox4.Controls.Add(trackBar_fanSpeed);
+            groupBox4.Location = new System.Drawing.Point(616, 340);
+            groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox4.Size = new System.Drawing.Size(412, 190);
+            groupBox4.TabIndex = 12;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Fans";
+            //
             // groupBox3 (Orientation MEMS)
             //
             // label_haAngle
@@ -373,7 +424,7 @@
             groupBox3.Controls.Add(textBox_altitude);
             groupBox3.Controls.Add(label_azimuth);
             groupBox3.Controls.Add(textBox_azimuth);
-            groupBox3.Location = new System.Drawing.Point(616, 340);
+            groupBox3.Location = new System.Drawing.Point(616, 545);
             groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -421,9 +472,10 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1092, 900);
+            ClientSize = new System.Drawing.Size(1092, 950);
             Controls.Add(groupBox2);
             Controls.Add(groupBox3);
+            Controls.Add(groupBox4);
             Controls.Add(groupBox1);
             Controls.Add(groupBox);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -437,6 +489,9 @@
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(trackBar_fanSpeed)).EndInit();
             ResumeLayout(false);
         }
 
@@ -474,5 +529,9 @@
         private System.Windows.Forms.TextBox textBox_altitude;
         private System.Windows.Forms.Label label_azimuth;
         private System.Windows.Forms.TextBox textBox_azimuth;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TrackBar trackBar_fanSpeed;
+        private System.Windows.Forms.Label label_fanSpeed;
+        private System.Windows.Forms.Label label_fanSpeedValue;
     }
 }

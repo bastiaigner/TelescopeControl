@@ -75,6 +75,9 @@ namespace TelescopeControl
             FlapMovingState flapMovingState = plc.ReadFlapMovingState();
             comboBox_coverState.BackColor = flapMovingState.IsMoving ? Color.LightGreen : Color.White;
 
+            int fanSpeed = plc.ReadFanSpeed();
+            label_fanSpeedValue.Text = fanSpeed == 0 ? "Off" : $"{fanSpeed} RPM";
+            trackBar_fanSpeed.Value = Math.Clamp(fanSpeed, 0, 4000);
         }
         private void timer_refresh_Tick(object sender, EventArgs e)
         {
@@ -103,6 +106,18 @@ namespace TelescopeControl
             {
                 MessageBox.Show("Flap is not in automatic mode. Please switch to automatic mode in the HMI panel.");
             }
+        }
+
+        private void trackBar_fanSpeed_Scroll(object sender, EventArgs e)
+        {
+            int value = trackBar_fanSpeed.Value;
+            if (value > 0 && value < 900)
+            {
+                value = 0;
+                trackBar_fanSpeed.Value = 0;
+            }
+            plc.SetFanSpeed(value);
+            label_fanSpeedValue.Text = value == 0 ? "Off" : $"{value} RPM";
         }
 
         private void comboBox_coverState_SelectionChangeCommitted(object sender, EventArgs e)
