@@ -27,12 +27,18 @@ namespace TelescopeControl.Alpaca.Response
             set
             {
                 _exception = value;
-               // If exception is an AlpacaException, carry over errorcode and errormessage
-               if (_exception.GetType().IsSubclassOf(typeof(AlpacaException)))
+                // Carry over errorcode and errormessage from AlpacaExceptions; anything
+                // else maps to the Alpaca driver-specific error base so clients never
+                // mistake a failure for success.
+                if (_exception is AlpacaException exc)
                 {
-                    AlpacaException exc = (AlpacaException)value;
                     ErrorNumber = exc.ErrorCode;
                     ErrorMessage = exc.ErrorMessage;
+                }
+                else
+                {
+                    ErrorNumber = 0x500;
+                    ErrorMessage = _exception.Message;
                 }
             }
         }
