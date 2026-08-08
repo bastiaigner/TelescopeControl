@@ -44,7 +44,9 @@ namespace TelescopeControl
 
             if (!trackBar_position.Capture)
             {
-                trackBar_position.Value = (int)focuser.currentPosition;
+                // During homing the servo can sit outside the soft limits; clamp so
+                // updating the display slider never throws.
+                trackBar_position.Value = (int)Math.Clamp(focuser.currentPosition, trackBar_position.Minimum, trackBar_position.Maximum);
             }
 
             textBox_focusPosition.BackColor = focuser.isMoving ? Color.LightGreen : Color.White;

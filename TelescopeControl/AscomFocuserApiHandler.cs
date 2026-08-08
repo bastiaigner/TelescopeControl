@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using TelescopeControl.Alpaca.Exceptions;
 
 namespace TelescopeControl
 {
@@ -167,11 +168,13 @@ namespace TelescopeControl
                 }
                 else if (actionName == "compensate-temperature")
                 {
-                    _focuser.MoveToCompensateTemperature();
+                    // Await the move so failures (e.g. not calibrated) surface as an
+                    // Alpaca error instead of vanishing in a discarded Task.
+                    _focuser.MoveToCompensateTemperature().GetAwaiter().GetResult();
                 }
                 else
                 {
-                    throw new InvalidOperationException("Unknown action: " + actionName);
+                    throw new AlpacaException(0x40C, "Unknown action: " + actionName);
                 }
                 return "ok";
 
